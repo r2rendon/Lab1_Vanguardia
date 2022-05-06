@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Core.Models;
+using Lab1_API_Vanguardia.Services;
 
 namespace Lab1_API_Vanguardia.Controllers
 {
@@ -8,19 +9,15 @@ namespace Lab1_API_Vanguardia.Controllers
     public class BooksController : ControllerBase
     {
         [HttpGet]
-        public Book Get()
+        public List<Book> Get()
         {
-            var book = new Book();
-            book.Name = "Aventuras de Arturo";
-            book.PublishedAt = "2022-07-07";
-            book.AvailableCopies = 11200;
-            return book;
+            return BooksService.GetAvailableBooks();
         }
 
         [HttpPost]
         public Book Post([FromBody] Book book)
         {
-            return book;
+            return BooksService.RegisterBook(book);
         }
     }
 }
